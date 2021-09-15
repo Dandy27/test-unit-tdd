@@ -12,8 +12,12 @@ class GetPostIpml implements GetPost {
   @override
   FuturePostCall call({required PostParamsDto params}) async {
     if (params.page <= 0) {
-      return Left(InvalidPostParams('não pode ser menor que 1'));
+      return Left(InvalidPostParams('page não pode ser menor que 1'));
     }
+     if (params.offset <= 0) {
+      return Left(InvalidPostParams('offset não pode ser menor que 1'));
+    }
+
     return repository.fetchPosts(params);
   }
 }
